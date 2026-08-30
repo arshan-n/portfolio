@@ -60,6 +60,60 @@ body {
   max-width: 560px;
 }
 
+.section {
+  padding: 44px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  margin-bottom: 32px;
+}
+
+.project-list { border-top: 0; }
+
+.project-row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule-light);
+}
+
+.project-list .project-row:last-child {
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.project-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+}
+
+.project-title {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.project-meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+
+.project-meta .sep { color: var(--ink-4); margin: 0 6px; }
+
+.project-line {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
 .footer {
   padding-top: 40px;
   border-top: 1px solid var(--rule);
