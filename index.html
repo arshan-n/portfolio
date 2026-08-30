@@ -77,6 +77,48 @@
   </div>
 </footer>
 
+<div class="case-modal" id="caseModal" aria-hidden="true">
+  <div class="case-overlay"></div>
+  <article class="case-panel" role="dialog" aria-modal="true">
+    <header class="case-header">
+      <div class="case-ref mono">CASE / 00</div>
+      <button class="case-close" aria-label="Close">ESC</button>
+    </header>
+    <div class="case-body" id="caseBody">
+      <h2 class="case-title" id="caseTitle">Title</h2>
+      <div class="case-sub"><span id="caseTags">tags</span><span class="sep">·</span><span id="caseStatus">status</span></div>
+      <section class="case-section">
+        <div class="case-kicker mono">// CASE_REF</div>
+        <p id="caseRef">case / 00</p>
+      </section>
+      <section class="case-section">
+        <div class="case-kicker mono">// PROBLEM</div>
+        <p id="caseProblem">—</p>
+      </section>
+      <section class="case-section">
+        <div class="case-kicker mono">// WHAT I BUILT</div>
+        <p id="caseBuilt">—</p>
+      </section>
+      <section class="case-section">
+        <div class="case-kicker mono">// ENGINEERING DECISION</div>
+        <p id="caseDecision">—</p>
+      </section>
+      <section class="case-section">
+        <div class="case-kicker mono">// WHAT WENT WRONG</div>
+        <p id="caseWrong">—</p>
+      </section>
+      <section class="case-section">
+        <div class="case-kicker mono">// RESULT</div>
+        <p id="caseResult">—</p>
+      </section>
+      <section class="case-section">
+        <div class="case-kicker mono">// CURRENT STATUS</div>
+        <p id="caseCurrent">—</p>
+      </section>
+    </div>
+  </article>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
