@@ -80,7 +80,7 @@ body {
   grid-template-columns: 56px 1fr;
   padding: 22px 0;
   border-top: 1px solid var(--rule-light);
-  transition: background-color 180ms ease;
+  transition: background-color 180ms ease, padding 180ms ease, box-shadow 180ms ease;
   position: relative;
 }
 
@@ -118,10 +118,18 @@ body {
 
 .project-row:hover {
   background: var(--hover-bg);
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.project-row:focus-visible {
+  outline: none;
+  background: var(--hover-bg);
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .project-row::after {
-  content: "->";
+  content: "→";
   position: absolute;
   right: 8px;
   top: 50%;
