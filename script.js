@@ -21,6 +21,7 @@ const CASES = {
   const $ = (id) => document.getElementById(id);
   const modal = $("caseModal");
   const rows = document.querySelectorAll(".project-row");
+  let skipHash = false;
 
   const FIELD_MAP = {
     ref: "caseRef", title: "caseTitle", tags: "caseTags", status: "caseStatus",
@@ -34,19 +35,45 @@ const CASES = {
     for (const k in FIELD_MAP) $(FIELD_MAP[k]).textContent = c[k];
   }
 
-  function open(key) {
+  function open(key, writeHash = true) {
     if (!CASES[key]) return;
     populate(key);
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    if (!writeHash || skipHash) return;
+    try { history.pushState({ key }, "", "#" + key); }
+    catch (_) { location.hash = key; }
   }
 
-  function close() {
+  function currentKey() {
+    const h = location.hash.replace(/^#/, "").trim().toLowerCase();
+    return KEYS.includes(h) ? h : null;
+  }
+
+  function close(writeHash = true) {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    if (!writeHash || !currentKey()) return;
+    skipHash = true;
+    try { history.pushState({ key: null }, "", location.pathname + location.search); }
+    catch (_) { location.hash = ""; }
+    setTimeout(() => (skipHash = false), 40);
   }
+
+  addEventListener("hashchange", () => {
+    if (skipHash) return;
+    const key = currentKey();
+    if (key) open(key, false);
+    else if (modal.classList.contains("open")) close(false);
+  });
+  addEventListener("popstate", () => {
+    if (skipHash) return;
+    const key = currentKey();
+    if (key) open(key, false);
+    else if (modal.classList.contains("open")) close(false);
+  });
 
   rows.forEach((row) => {
     row.addEventListener("click", () => open(row.getAttribute("data-project")));
