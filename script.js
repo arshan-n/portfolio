@@ -19,5 +19,45 @@ const CASES = {
 (function () {
   const KEYS = Object.keys(CASES);
   const $ = (id) => document.getElementById(id);
-  console.log("init", KEYS);
+  const modal = $("caseModal");
+  const rows = document.querySelectorAll(".project-row");
+
+  function populate(key) {
+    const c = CASES[key];
+    if (!c) return;
+    $("caseRef").textContent = c.ref;
+    $("caseTitle").textContent = c.title;
+    $("caseTags").textContent = c.tags;
+    $("caseStatus").textContent = c.status;
+    $("caseProblem").textContent = c.problem;
+    $("caseBuilt").textContent = c.built;
+    $("caseDecision").textContent = c.decision;
+    $("caseWrong").textContent = c.wrong;
+    $("caseResult").textContent = c.result;
+    $("caseCurrent").textContent = c.current;
+  }
+
+  function open(key) {
+    if (!CASES[key]) return;
+    populate(key);
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  rows.forEach((row) => {
+    row.addEventListener("click", () => open(row.getAttribute("data-project")));
+  });
+
+  document.querySelector(".case-overlay").addEventListener("click", () => close());
+  document.querySelector(".case-close").addEventListener("click", () => close());
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("open")) close();
+  });
 })();
