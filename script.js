@@ -22,19 +22,16 @@ const CASES = {
   const modal = $("caseModal");
   const rows = document.querySelectorAll(".project-row");
 
+  const FIELD_MAP = {
+    ref: "caseRef", title: "caseTitle", tags: "caseTags", status: "caseStatus",
+    problem: "caseProblem", built: "caseBuilt", decision: "caseDecision",
+    wrong: "caseWrong", result: "caseResult", current: "caseCurrent",
+  };
+
   function populate(key) {
     const c = CASES[key];
     if (!c) return;
-    $("caseRef").textContent = c.ref;
-    $("caseTitle").textContent = c.title;
-    $("caseTags").textContent = c.tags;
-    $("caseStatus").textContent = c.status;
-    $("caseProblem").textContent = c.problem;
-    $("caseBuilt").textContent = c.built;
-    $("caseDecision").textContent = c.decision;
-    $("caseWrong").textContent = c.wrong;
-    $("caseResult").textContent = c.result;
-    $("caseCurrent").textContent = c.current;
+    for (const k in FIELD_MAP) $(FIELD_MAP[k]).textContent = c[k];
   }
 
   function open(key) {
