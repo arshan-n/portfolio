@@ -74,6 +74,12 @@ const CASES = {
 
   rows.forEach((row) => {
     row.addEventListener("click", () => open(row.getAttribute("data-project")));
+    row.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " " || e.code === "Space") {
+        e.preventDefault();
+        open(row.getAttribute("data-project"));
+      }
+    });
   });
 
   document.querySelector(".case-overlay").addEventListener("click", () => close());
