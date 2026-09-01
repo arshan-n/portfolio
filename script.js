@@ -21,7 +21,28 @@ const CASES = {
       label: "visit arshachu storefront →",
     },
   },
-  proj2: { ref: "CASE / 02", title: "Project Two", tags: "tag1 / tag2", status: "wip", problem: "p2", built: "b2", decision: "d2", wrong: "w2", result: "r2", current: "c2" },
+  codecheckr: {
+    ref: "CASE / 02",
+    title: "CodeCheckr",
+    tags: "education / software",
+    status: "building",
+    problem:
+      "Most automated marking for CS1-level courses grades on passing test cases only, which means students learn to game test suites instead of writing robust code. The grading assistants at the university were manually reading hundreds of submissions per week to catch surface-level correctness with no structural insight — and it was burning them out.",
+    built:
+      "A two-stage marker: first stage runs test suites as usual (fast, parallel, per-process isolation). Second stage runs an AST-level rubric checker on the passing submissions, scoring on separation of concerns, depth of control flow, naming hygiene, and several domain-specific structural heuristics. TAs only review the combined rubric output plus the small set of submissions that failed all or nothing — they don't touch the bulk of submissions at all.",
+    decision:
+      "Wrote the AST layer on the same parser that powers the reference solution itself instead of parsing each submission a second time. That way if a language upgrade introduces a syntax rule that breaks one submission, it breaks the baseline first and we find it during spec review, not as a ghost false-negative in production.",
+    wrong:
+      "First pass had the rubric weights tuned way too aggressively against long variable names. Top-scoring submissions started renaming variables to 2 or 3 character names to beat the 'line noise' rubric rule. Hilarious and very obvious in hindsight — I threw the name-length rule out and replaced it with an identifier-reuse metric across functions instead.",
+    result:
+      "Currently in live beta with a single 120-student course. TA grading time per assignment is down from ~2 days total to ~2 hours, and the feedback turnaround for students went from 9 days post-deadline to under 48 hours. Structural rubric is still being tuned every assignment cycle.",
+    current:
+      "Active build. Next items are a student-facing rubric breakdown so submissions know *why* they lost marks, and a JSON export feed that plugs directly into the university's existing LMS grade import without another manual upload step.",
+    demo: {
+      url: "https://codecheckr.example.com/",
+      label: "try the demo grader →",
+    },
+  },
   proj3: { ref: "CASE / 03", title: "Project Three", tags: "tag1 / tag2", status: "wip", problem: "p3", built: "b3", decision: "d3", wrong: "w3", result: "r3", current: "c3" },
   proj4: { ref: "CASE / 04", title: "Project Four", tags: "tag1 / tag2", status: "wip", problem: "p4", built: "b4", decision: "d4", wrong: "w4", result: "r4", current: "c4" },
 };
