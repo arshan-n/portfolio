@@ -62,18 +62,15 @@ const CASES = {
     setTimeout(() => (skipHash = false), 40);
   }
 
-  addEventListener("hashchange", () => {
+  const syncFromUrl = () => {
     if (skipHash) return;
     const key = currentKey();
-    if (key) open(key, false);
-    else if (modal.classList.contains("open")) close(false);
-  });
-  addEventListener("popstate", () => {
-    if (skipHash) return;
-    const key = currentKey();
-    if (key) open(key, false);
-    else if (modal.classList.contains("open")) close(false);
-  });
+    key ? open(key, false) : modal.classList.contains("open") && close(false);
+  };
+  addEventListener("hashchange", syncFromUrl);
+  addEventListener("popstate", syncFromUrl);
+
+  currentKey() && open(currentKey(), false);
 
   rows.forEach((row) => {
     row.addEventListener("click", () => open(row.getAttribute("data-project")));
@@ -81,7 +78,10 @@ const CASES = {
 
   document.querySelector(".case-overlay").addEventListener("click", () => close());
   document.querySelector(".case-close").addEventListener("click", () => close());
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("open")) close();
+  document.addEventListener("keydown", (e) =>
+    e.key === "Escape" && modal.classList.contains("open") && close());
+
+  modal.addEventListener("click", (e) => {
+    if (e.target.hasAttribute("data-close")) close();
   });
 })();
