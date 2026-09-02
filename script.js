@@ -65,7 +65,28 @@ const CASES = {
       label: "book a demo appointment →",
     },
   },
-  proj4: { ref: "CASE / 04", title: "Project Four", tags: "tag1 / tag2", status: "wip", problem: "p4", built: "b4", decision: "d4", wrong: "w4", result: "r4", current: "c4" },
+  map2med: {
+    ref: "CASE / 04",
+    title: "Map2Med",
+    tags: "education / web",
+    status: "shipped",
+    problem:
+      "Medical students memorise hundreds of condition → first-line-drug maps for exams, and the existing resources were either 500-slide PDF decks you printed and highlighted, or interactive flashcards that forced linear memorisation without showing relationships between treatment branches.",
+    built:
+      "A node-based browser map viewer. Each condition is a graph node. First-line drugs are immediate children, second-line are grandchildren, contraindications are reverse red edges, and you can walk from condition to sibling conditions via shared-mechanism connections. Filterable by exam topic. State lives entirely in the URL hash so students can share 'this exact view with this filter applied' links to each other.",
+    decision:
+      "Plain SVG for the graph engine, not D3 or Cytoscape. The graph sizes max out at about 180 nodes per topic, which is trivially renderable by the browser natively, and the event model on SVG elements is 1:1 with HTML. Importing a 400KB graph library to save 100 lines of my own layout code wasn't worth it.",
+    wrong:
+      "First version used the SVG viewBox as the state carrier in the URL hash, because it seemed like free zoom history. Bad idea. On one occasion a student shared a link to a zoomed-out view that accidentally exposed the unreleased next-exam-topic graph nodes that were hidden in that build but still rendered in the viewBox. Nothing actually confidential, but still embarrassing. State hash is now an allowlist. Zoom is not included.",
+    result:
+      "Shipped in 2024 for one cohort of 180 students. 92% of them used it within two weeks of launch and 68% said they'd used a shared link in a study group. No server at all — just static files on Cloudflare Pages, zero ongoing cost.",
+    current:
+      "Feature-frozen. The cohort moves on each year and I hand the GitHub repo over to two current students with write-access so they can edit content. I occasionally review the odd pull request. Otherwise no active work.",
+    demo: {
+      url: "https://map2med.example.com/",
+      label: "open Map2Med →",
+    },
+  },
 };
 
 (function () {
