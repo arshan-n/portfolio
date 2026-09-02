@@ -45,16 +45,25 @@ const CASES = {
   },
   atvidaberg: {
     ref: "CASE / 03",
-    title: "Atvidaberg Tandvard",
+    title: "Åtvidaberg Tandvård",
     tags: "healthcare / software",
     status: "maintained",
     problem:
-      "[placeholder — fix clinic name spelling next]",
-    built: "[placeholder]",
-    decision: "[placeholder]",
-    wrong: "[placeholder]",
-    result: "[placeholder]",
-    current: "[placeholder]",
+      "A small clinic with three dentists and one receptionist using a mish-mash of Google Calendar, a legacy book-it-online widget from 2017 that didn't know about Swedish public holidays, and an intake paper form that patients had to fill out on arrival and then get typed in by hand. No-show rate was ~19% and the receptionist spent 3+ hours a day on booking confirmations.",
+    built:
+      "A single booking + intake web app glued directly on top of the existing Google Workspace setup. Calendar writes go straight to their existing calendar with no data-migration step. Intake forms are collected 24 hours before the appointment via a signed one-time URL and rendered as a pre-filled PDF waiting in the patient file folder by appointment start. SMS reminders go out 72h, 24h, and 2h before via Twilio.",
+    decision:
+      "Refused to build a custom calendar from scratch. Every part of this system that touches time or dates is unmodified Google Calendar logic, including their holiday handling, recurring-event expansion, and cross-user conflict detection. The app only applies clinic-specific rules (opening hours, dentist-to-specialty matching) and rejects anything before the write. Date bugs are the worst. Let Google have them.",
+    wrong:
+      "The 2-hour-before SMS reminder launched with the same 'reply YES or NO' template as the 24h one. Receptionist started replying to patients who texted back 'NO' at 2 hours with 'thanks!' manually. Fine until one Monday morning 3 patients cancelled within 10 minutes and she was busy with a walk-in emergency — the empty slots went un-filled for 18 hours total. 2h reminder became 'see you soon, call the clinic if you need to reschedule' instead.",
+    result:
+      "No-show rate dropped from 19% to under 6% in the first three months. Receptionist booking-administration time is down to about 30 minutes a day and mostly just handling edge-case phone calls. The dentists still use the exact calendar interface they've used for 10 years, which was the entire point.",
+    current:
+      "Maintenance releases once a quarter. Biggest ongoing effort is keeping the Google OAuth consent screen and scopes alive as Google periodically deprecates things. Not fun, but 15 minutes of work every few months. Otherwise the system hums.",
+    demo: {
+      url: "https://atvidaberg-tandvard.example.com/",
+      label: "book a demo appointment →",
+    },
   },
   proj4: { ref: "CASE / 04", title: "Project Four", tags: "tag1 / tag2", status: "wip", problem: "p4", built: "b4", decision: "d4", wrong: "w4", result: "r4", current: "c4" },
 };
