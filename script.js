@@ -43,7 +43,19 @@ const CASES = {
       label: "try the demo grader →",
     },
   },
-  proj3: { ref: "CASE / 03", title: "Project Three", tags: "tag1 / tag2", status: "wip", problem: "p3", built: "b3", decision: "d3", wrong: "w3", result: "r3", current: "c3" },
+  atvidaberg: {
+    ref: "CASE / 03",
+    title: "Atvidaberg Tandvard",
+    tags: "healthcare / software",
+    status: "maintained",
+    problem:
+      "[placeholder — fix clinic name spelling next]",
+    built: "[placeholder]",
+    decision: "[placeholder]",
+    wrong: "[placeholder]",
+    result: "[placeholder]",
+    current: "[placeholder]",
+  },
   proj4: { ref: "CASE / 04", title: "Project Four", tags: "tag1 / tag2", status: "wip", problem: "p4", built: "b4", decision: "d4", wrong: "w4", result: "r4", current: "c4" },
 };
 
