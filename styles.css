@@ -271,3 +271,18 @@ body {
   transition: background 160ms ease, color 160ms ease;
 }
 .demo-link:hover { background: transparent; color: var(--ink); }
+
+
+.btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+  padding: 12px 22px;
+  border: 1px solid var(--rule);
+  transition: background 160ms ease, color 160ms ease;
+}
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: transparent; color: var(--ink); }
+.btn-secondary { color: var(--ink-2); }
+.btn-secondary:hover { background: var(--hover-bg); color: var(--ink); }
