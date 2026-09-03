@@ -258,3 +258,16 @@ body {
   .case-title { font-size: 26px; }
   .case-header { padding: 14px 18px; }
 }
+
+
+.demo-link {
+  display: inline-block;
+  padding: 10px 18px;
+  background: var(--ink);
+  color: var(--bg);
+  text-decoration: none;
+  border: 1px solid var(--rule);
+  font-size: 13px;
+  transition: background 160ms ease, color 160ms ease;
+}
+.demo-link:hover { background: transparent; color: var(--ink); }

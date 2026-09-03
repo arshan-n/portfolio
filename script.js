@@ -101,11 +101,17 @@ const CASES = {
     problem: "caseProblem", built: "caseBuilt", decision: "caseDecision",
     wrong: "caseWrong", result: "caseResult", current: "caseCurrent",
   };
+  const demoSection = document.getElementById("caseDemoSection");
+  const demoLink = document.getElementById("caseDemoLink");
 
   function populate(key) {
     const c = CASES[key];
     if (!c) return;
     for (const k in FIELD_MAP) $(FIELD_MAP[k]).textContent = c[k];
+    demoSection.hidden = !c.demo?.url;
+    if (demoSection.hidden) return;
+    demoLink.href = c.demo.url;
+    demoLink.textContent = (c.demo.label || c.demo.url).trim();
   }
 
   function open(key, writeHash = true) {
