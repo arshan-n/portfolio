@@ -313,3 +313,30 @@ body {
   max-width: 420px;
 }
 .nf-btn { margin-top: 6px; }
+
+
+.project-row .receipt-expand {
+  max-height: 0;
+  overflow: hidden;
+  grid-column: 1 / -1;
+  padding: 0;
+  opacity: 0;
+  transition: max-height 260ms ease, padding 260ms ease, opacity 220ms ease;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.project-row:hover .receipt-expand,
+.project-row:focus-within .receipt-expand {
+  max-height: 400px;
+  padding: 16px 8px 4px 64px;
+  opacity: 1;
+}
+.receipt-expand .receipt-title {
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.receipt-expand ul { list-style: none; }
+.receipt-expand li { padding: 3px 0; }
+.receipt-expand li::before { content: "— "; color: var(--ink-4); margin-right: 4px; }
