@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="404 — Arshan Nekoui." />
+<meta name="description" content="Page not found — Arshan Nekoui." />
 <meta name="robots" content="noindex" />
 <title>404 — Arshan Nekoui</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,37 +12,12 @@
 <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-<main class="container">
-  <div class="status-row">
-    <div class="status-code">404</div>
-    <div class="status-meta">
-      <span class="ok">GET</span><span class="bad">404 NOT_FOUND</span><span class="ok">UTF-8</span>
-    </div>
-  </div>
 
-  <section class="error-body">
-    <div class="error-kicker">// REQUEST / ERROR</div>
-    <h1 class="error-title">This page is not on the shelf.</h1>
-    <p class="error-text">The URL you followed pointed at something that doesn't exist. Either the link is broken, or the page was moved and nobody left a forwarding note. Sorry about that.</p>
-
-    <div class="log-block">
-      <div class="log-head"><span>pg_router.log</span><span>rows = 0</span></div>
-      <div class="log-line"><span class="k">[k]</span><span class="a">SELECT * FROM pages WHERE path = $1 LIMIT 1;</span></div>
-      <div class="log-line"><span class="k">[a]</span>parameters: <code>/your-url-here</code></div>
-      <div class="log-line"><span class="k">[e]</span><span class="e">result: 0 rows.</span></div>
-    </div>
-
-    <div class="actions">
-      <a href="/" onclick="if(history.length>1){event.preventDefault();history.back();}" class="btn btn-secondary">← go back</a>
-      <a href="/" class="btn btn-primary">← go back home</a>
-    </div>
-  </section>
-
-  <div class="footer-line">
-    <a href="https://github.com/arshan-n" target="_blank" rel="noopener noreferrer">github</a>
-    <a href="https://www.linkedin.com/in/arshan-nekoui/" target="_blank" rel="noopener noreferrer">linkedin</a>
-    <a href="mailto:me@arshannekoui.com">me@arshannekoui.com</a>
-  </div>
+<main class="container nf">
+  <h1 class="nf-code">404</h1>
+  <p class="nf-message">Are you lost?</p>
+  <a href="/" class="btn btn-primary nf-btn" aria-label="Go back home">← go back home</a>
 </main>
+
 </body>
 </html>
