@@ -315,3 +315,26 @@ body {
 .nf-btn { margin-top: 6px; }
 
 
+
+
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+}
+.sql-line {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  border-bottom: 1px dashed var(--ink-4);
+  padding-bottom: 1px;
+  transition: border-color 140ms ease, color 140ms ease;
+}
+.sql-line:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.project-row.flash { background: #ECE9DE !important; transition: background 480ms ease; }
