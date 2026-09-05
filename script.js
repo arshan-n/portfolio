@@ -90,6 +90,12 @@ const CASES = {
 };
 
 (function () {
+  try {
+    const s = "font-family:'JetBrains Mono',monospace;font-size:13px;padding:4px 8px;line-height:1.5;";
+    console.log("%c%s", s + "color:#111;background:#F0ECE2;", " // You looked under the hood.");
+    console.log("%c%s", s + "color:#111;background:#FAFAF7;", " I like you.");
+  } catch (_) {}
+
   const KEYS = Object.keys(CASES);
   const $ = (id) => document.getElementById(id);
   const modal = $("caseModal");
@@ -166,7 +172,18 @@ const CASES = {
   document.addEventListener("keydown", (e) =>
     e.key === "Escape" && modal.classList.contains("open") && close());
 
-  modal.addEventListener("click", (e) => {
-    if (e.target.hasAttribute("data-close")) close();
-  });
+  modal.addEventListener("click", (e) => e.target.hasAttribute("data-close") && close());
+  const sql = $("sqlLine");
+  if (sql) {
+    let busy = false;
+    sql.addEventListener("click", () => {
+      if (busy) return;
+      busy = true;
+      rows.forEach((r, i) => {
+        setTimeout(() => r.classList.add("flash"), i * 70);
+        setTimeout(() => r.classList.remove("flash"), i * 70 + 520);
+      });
+      setTimeout(() => (busy = false), rows.length * 70 + 620);
+    });
+  }
 })();
