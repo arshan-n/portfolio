@@ -197,6 +197,7 @@ body {
   max-height: 84vh;
   overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  animation: slideUp 220ms ease both;
 }
 .case-header {
   position: sticky;
@@ -338,3 +339,8 @@ body {
 }
 .sql-line:hover { color: var(--ink); border-bottom-color: var(--ink); }
 .project-row.flash { background: #ECE9DE !important; transition: background 480ms ease; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
