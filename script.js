@@ -186,4 +186,25 @@ const CASES = {
       setTimeout(() => (busy = false), rows.length * 70 + 620);
     });
   }
+
+  // Self-check — fail loud on boot if CASES / rows drift.
+  (function selfCheck() {
+    const fieldKeys = Object.keys(FIELD_MAP);
+    for (const key of KEYS) {
+      const c = CASES[key];
+      if (!c) throw new Error("KEYS[" + key + "] missing from CASES");
+      for (const fk of fieldKeys) {
+        if (typeof c[fk] !== "string" || !c[fk].trim().length) {
+          throw new Error("CASES." + key + "." + fk + " missing or empty");
+        }
+      }
+      if ("demo" in c && (!c.demo || typeof c.demo.url !== "string" || !c.demo.url)) {
+        throw new Error("CASES." + key + ".demo present but url is missing");
+      }
+    }
+    rows.forEach((row) => {
+      const k = row.dataset.project;
+      if (!KEYS.includes(k)) throw new Error("Project row data-project='" + k + "' not in CASES keys");
+    });
+  })();
 })();
