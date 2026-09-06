@@ -59,7 +59,7 @@ const CASES = {
     result:
       "No-show rate dropped from 19% to under 6% in the first three months. Receptionist booking-administration time is down to about 30 minutes a day and mostly just handling edge-case phone calls. The dentists still use the exact calendar interface they've used for 10 years, which was the entire point.",
     current:
-      "Maintenance releases once a quarter. Biggest ongoing effort is keeping the Google OAuth consent screen and scopes alive as Google periodically deprecates things. Not fun, but 15 minutes of work every few months. Otherwise the system hums.",
+      "Maintenance releases once a quarter. Biggest ongoing effort is keeping the Google OAuth consent screen and scopes alive as Google periodically deprecates things. Not fun, but 15 minutes of work every few months. Otherwise the system hums. Clinic receives reminders correctly.",
     demo: {
       url: "https://atvidaberg-tandvard.example.com/",
       label: "book a demo appointment →",
