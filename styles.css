@@ -258,6 +258,7 @@ body {
   .case-body { padding: 28px 22px 40px; }
   .case-title { font-size: 26px; }
   .case-header { padding: 14px 18px; }
+  .container.nf { padding: 10vh 20px 6vh; }
 }
 
 
