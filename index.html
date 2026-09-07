@@ -6,7 +6,7 @@
 <meta name="author" content="Arshan Nekoui" />
 <meta name="description" content="Arshan Nekoui — student, developer, founder. Arshachu, CodeCheckr, Åtvidaberg Tandvård, Map2Med." />
 <meta name="theme-color" content="#FAFAF7" />
-
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FAFAF7'/%3E%3Ctext x='50%25' y='68%25' font-size='72' font-family='JetBrains Mono, ui-monospace, monospace' font-weight='400' text-anchor='middle' fill='%230A0A0A'%3EA%3C/text%3E%3C/svg%3E" />
 <meta property="og:site_name" content="Arshan Nekoui" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Arshan Nekoui" />
@@ -21,7 +21,7 @@
 
 <link rel="canonical" href="https://arshannekoui.com/" />
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FAFAF7'/%3E%3Ctext x='50%25' y='68%25' font-size='72' font-family='JetBrains Mono, ui-monospace, monospace' font-weight='400' text-anchor='middle' fill='%230A0A0A'%3EA%3C/text%3E%3C/svg%3E" />
+
 <title>Arshan Nekoui</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
 <main class="container">
   <header class="header">
     <h1 class="name">ARSHAN NEKOUI</h1>
@@ -41,39 +42,16 @@
     </div>
     <div class="project-list">
 
-      <article class="project-row" data-project="arshachu" tabindex="0" role="button" aria-label="Open Arshachu case file">
-        <div class="project-num">[01]</div>
+      <article class="project-row" data-project="mashtest" tabindex="0" role="button" aria-label="Open MASHTEST case file">
+        <div class="project-num">[00]</div>
         <div class="project-body">
-          <div class="project-title">Arshachu</div>
-          <div class="project-meta"><span class="tag">commerce</span><span class="sep">/</span><span class="tag">software</span></div>
-          <div class="project-line">£300 → six figures in &lt; 1 year</div>
-        </div>
-      </article>
-
-      <article class="project-row" data-project="codecheckr" tabindex="0" role="button" aria-label="Open CodeCheckr case file">
-        <div class="project-num">[02]</div>
-        <div class="project-body">
-          <div class="project-title">CodeCheckr</div>
-          <div class="project-meta"><span class="tag">education</span><span class="sep">/</span><span class="tag">software</span></div>
-          <div class="project-line">currently building</div>
-        </div>
-      </article>
-
-      <article class="project-row" data-project="atvidaberg" tabindex="0" role="button" aria-label="Open Åtvidaberg Tandvård case file">
-        <div class="project-num">[03]</div>
-        <div class="project-body">
-          <div class="project-title">Åtvidaberg Tandvård</div>
-          <div class="project-meta"><span class="tag">healthcare</span><span class="sep">/</span><span class="tag">software</span></div>
-          <div class="project-line">currently maintained</div>
-        </div>
-      </article>
-
-      <article class="project-row" data-project="map2med" tabindex="0" role="button" aria-label="Open Map2Med case file">
-        <div class="project-num">[04]</div>
-        <div class="project-body">
-          <div class="project-title">Map2Med</div>
-          <div class="project-meta"><span class="tag">education</span><span class="sep">/</span><span class="tag">web</span></div>
-          <div class="project-line">shipped 2024</div>
+          <div class="project-title">test [2026]</div>
+          <div class="project-meta">
+            <span class="tag">qwerty</span>
+            <span class="sep">/</span>
+            <span class="tag">asdf</span>
+          </div>
+          <div class="project-line">asdasdasdaskdj akjshd kjadhsk h</div>
         </div>
       </article>
 
@@ -82,17 +60,18 @@
 </main>
 
 <footer class="footer">
-  <div class="footer-links">
-    <a href="https://github.com/arshan-n" class="link-mono" target="_blank" rel="noopener noreferrer">github</a>
-    <span class="dot">·</span>
-    <a href="https://www.linkedin.com/in/arshan-nekoui/" class="link-mono" target="_blank" rel="noopener noreferrer">linkedin</a>
-    <span class="dot">·</span>
-    <a href="mailto:me@arshannekoui.com" class="link-mono">email</a>
-  </div>
-  <div class="footer-meta">
+    <div class="footer-links">
+      <a href="https://github.com/arshan-n" class="link-mono" target="_blank" rel="noopener noreferrer">github</a>
+      <span class="dot">·</span>
+      <a href="https://www.linkedin.com/in/arshan-nekoui/" class="link-mono" target="_blank" rel="noopener noreferrer">linkedin</a>
+      <span class="dot">·</span>
+      <a href="mailto:me@arshannekoui.com" class="link-mono">email</a>
+    </div>
+    <div class="footer-meta">
       <button type="button" class="sql-line mono" id="sqlLine" aria-label="Run SELECT on arshan">SELECT * FROM arshan WHERE curiosity = true;</button>
     </div>
-</footer>
+  </footer>
+</main>
 
 <div class="case-modal" id="caseModal" aria-hidden="true">
   <div class="case-overlay" data-close></div>
@@ -102,41 +81,45 @@
       <button class="case-close" data-close aria-label="Close">ESC</button>
     </header>
     <div class="case-body" id="caseBody">
-      <h2 class="case-title" id="caseTitle">Title</h2>
-      <div class="case-sub"><span id="caseTags">tags</span><span class="sep">·</span><span id="caseStatus">status</span></div>
+      <h2 class="case-title" id="caseTitle"></h2>
+      <div class="case-sub">
+        <span id="caseTags"></span>
+        <span class="sep">·</span>
+        <span id="caseStatus"></span>
+      </div>
       <section class="case-section">
         <div class="case-kicker mono">// CASE_REF</div>
-        <p id="caseRef">case / 00</p>
+        <p id="caseRef"></p>
       </section>
       <section class="case-section">
         <div class="case-kicker mono">// PROBLEM</div>
-        <p id="caseProblem">—</p>
+        <p id="caseProblem"></p>
       </section>
       <section class="case-section">
         <div class="case-kicker mono">// WHAT I BUILT</div>
-        <p id="caseBuilt">—</p>
+        <p id="caseBuilt"></p>
       </section>
       <section class="case-section">
         <div class="case-kicker mono">// ENGINEERING DECISION</div>
-        <p id="caseDecision">—</p>
+        <p id="caseDecision"></p>
       </section>
       <section class="case-section">
         <div class="case-kicker mono">// WHAT WENT WRONG</div>
-        <p id="caseWrong">—</p>
+        <p id="caseWrong"></p>
       </section>
       <section class="case-section">
         <div class="case-kicker mono">// RESULT</div>
-        <p id="caseResult">—</p>
+        <p id="caseResult"></p>
       </section>
       <section class="case-section">
         <div class="case-kicker mono">// CURRENT STATUS</div>
-        <p id="caseCurrent">—</p>
+        <p id="caseCurrent"></p>
       </section>
 
       <section class="case-section case-demo" id="caseDemoSection" hidden>
         <div class="case-kicker mono">// DEMO</div>
         <p>
-          <a id="caseDemoLink" href="#" class="demo-link mono"></a>
+          <a id="caseDemoLink" href="#" class="demo-link mono" target="_blank" rel="noopener noreferrer"></a>
         </p>
       </section>
     </div>

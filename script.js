@@ -1,91 +1,21 @@
 const CASES = {
-  arshachu: {
-    ref: "CASE / 01",
-    title: "Arshachu",
-    tags: "commerce / software",
-    status: "active",
+  mashtest: {
+    ref: "CASE / 00",
+    title: "test",
+    tags: "qwerty / asdf",
+    status: "wip",
     problem:
-      "A classic e-commerce arbitrage problem with one extra constraint: every supplier price and availability feed updated on its own cadence, and the business couldn't afford stale listings leading to oversells. The previous stack was a single cron job every 15 minutes that wrote the entire price table — it scaled to about 8k SKUs before each sync run started overlapping with the next one and corrupting inventory.",
+      "alskdjlkasjdlk asj dlkj aslkd jlkasj dljksld.",
     built:
-      "Replaced the monolithic sync with a per-SKU state machine plus a delta-publish pipeline. Incoming supplier feeds are parsed into row-level diffs, each diff is idempotently applied against a Postgres materialized view, and only rows whose final price or stock changed get pushed to the shop API. A backpressure queue handles the slow Shopify REST rate limits.",
+      "dskfjk sjdfkl sjdhf lkjsd lkf sjdklf qwei qpw oiru jaksdf lkxj.",
     decision:
-      "Kept it on Postgres + a small Node worker rather than introducing a queue product like Kafka or SQS. The total daily message volume didn't warrant the operational weight of a dedicated message broker, and the per-queue ordering guarantees we needed (SKU-level serializability) were easier to implement correctly with advisory locks on SKU ids in Postgres than on a consumer group.",
+      "qowiru qpw pei oqi wepr oqw eiro pw iou qwp eor iqwp eiour.",
     wrong:
-      "First version used advisory locks at the supplier-level, not the SKU-level. Worked fine for one supplier. When we onboarded a second supplier that overlapped on 200 SKUs, we got silent write-write races on those SKUs that surfaced as 'sometimes the price is wrong, randomly' bugs three weeks later. Took two days of live tracing to reproduce because it only happened under the 1am bulk-sync load.",
+      "zoxmvbc nbxzcv mzcx bv zxmv bvcxz lkhgfd sa poi uy tr ew.",
     result:
-      "£300 starting ad budget turned into six figures in top-line revenue inside 12 months. Sync overlap dropped from ~14% of runs to zero. Worst-case listing staleness went from 15+ minutes to under 60 seconds even with 3 concurrent suppliers active, and oversell tickets hit zero within a month of rollout.",
+      "aklsjd fqpw eiur ymvnx zc bhasgdf ioyqw uer zxmbv ckhalsd fp.",
     current:
-      "Still actively running on the same stack today. I add new supplier parsers occasionally. Once a month I run VACUUM ANALYZE and archive a copy of the materialized view offsite. It is the most boring production system I own and that is a very good thing.",
-    demo: {
-      url: "https://arshachu.example.com/",
-      label: "visit arshachu storefront →",
-    },
-  },
-  codecheckr: {
-    ref: "CASE / 02",
-    title: "CodeCheckr",
-    tags: "education / software",
-    status: "building",
-    problem:
-      "Most automated marking for CS1-level courses grades on passing test cases only, which means students learn to game test suites instead of writing robust code. The grading assistants at the university were manually reading hundreds of submissions per week to catch surface-level correctness with no structural insight — and it was burning them out.",
-    built:
-      "A two-stage marker: first stage runs test suites as usual (fast, parallel, per-process isolation). Second stage runs an AST-level rubric checker on the passing submissions, scoring on separation of concerns, depth of control flow, naming hygiene, and several domain-specific structural heuristics. TAs only review the combined rubric output plus the small set of submissions that failed all or nothing — they don't touch the bulk of submissions at all.",
-    decision:
-      "Wrote the AST layer on the same parser that powers the reference solution itself instead of parsing each submission a second time. That way if a language upgrade introduces a syntax rule that breaks one submission, it breaks the baseline first and we find it during spec review, not as a ghost false-negative in production.",
-    wrong:
-      "First pass had the rubric weights tuned way too aggressively against long variable names. Top-scoring submissions started renaming variables to 2 or 3 character names to beat the 'line noise' rubric rule. Hilarious and very obvious in hindsight — I threw the name-length rule out and replaced it with an identifier-reuse metric across functions instead.",
-    result:
-      "Currently in live beta with a single 120-student course. TA grading time per assignment is down from ~2 days total to ~2 hours, and the feedback turnaround for students went from 9 days post-deadline to under 48 hours. Structural rubric is still being tuned every assignment cycle.",
-    current:
-      "Active build. Next items are a student-facing rubric breakdown so submissions know *why* they lost marks, and a JSON export feed that plugs directly into the university's existing LMS grade import without another manual upload step.",
-    demo: {
-      url: "https://codecheckr.example.com/",
-      label: "try the demo grader →",
-    },
-  },
-  atvidaberg: {
-    ref: "CASE / 03",
-    title: "Åtvidaberg Tandvård",
-    tags: "healthcare / software",
-    status: "maintained",
-    problem:
-      "A small clinic with three dentists and one receptionist using a mish-mash of Google Calendar, a legacy book-it-online widget from 2017 that didn't know about Swedish public holidays, and an intake paper form that patients had to fill out on arrival and then get typed in by hand. No-show rate was ~19% and the receptionist spent 3+ hours a day on booking confirmations.",
-    built:
-      "A single booking + intake web app glued directly on top of the existing Google Workspace setup. Calendar writes go straight to their existing calendar with no data-migration step. Intake forms are collected 24 hours before the appointment via a signed one-time URL and rendered as a pre-filled PDF waiting in the patient file folder by appointment start. SMS reminders go out 72h, 24h, and 2h before via Twilio.",
-    decision:
-      "Refused to build a custom calendar from scratch. Every part of this system that touches time or dates is unmodified Google Calendar logic, including their holiday handling, recurring-event expansion, and cross-user conflict detection. The app only applies clinic-specific rules (opening hours, dentist-to-specialty matching) and rejects anything before the write. Date bugs are the worst. Let Google have them.",
-    wrong:
-      "The 2-hour-before SMS reminder launched with the same 'reply YES or NO' template as the 24h one. Receptionist started replying to patients who texted back 'NO' at 2 hours with 'thanks!' manually. Fine until one Monday morning 3 patients cancelled within 10 minutes and she was busy with a walk-in emergency — the empty slots went un-filled for 18 hours total. 2h reminder became 'see you soon, call the clinic if you need to reschedule' instead.",
-    result:
-      "No-show rate dropped from 19% to under 6% in the first three months. Receptionist booking-administration time is down to about 30 minutes a day and mostly just handling edge-case phone calls. The dentists still use the exact calendar interface they've used for 10 years, which was the entire point.",
-    current:
-      "Maintenance releases once a quarter. Biggest ongoing effort is keeping the Google OAuth consent screen and scopes alive as Google periodically deprecates things. Not fun, but 15 minutes of work every few months. Otherwise the system hums. Clinic receives reminders correctly.",
-    demo: {
-      url: "https://atvidaberg-tandvard.example.com/",
-      label: "book a demo appointment →",
-    },
-  },
-  map2med: {
-    ref: "CASE / 04",
-    title: "Map2Med",
-    tags: "education / web",
-    status: "shipped",
-    problem:
-      "Medical students memorise hundreds of condition → first-line-drug maps for exams, and the existing resources were either 500-slide PDF decks you printed and highlighted, or interactive flashcards that forced linear memorisation without showing relationships between treatment branches.",
-    built:
-      "A node-based browser map viewer. Each condition is a graph node. First-line drugs are immediate children, second-line are grandchildren, contraindications are reverse red edges, and you can walk from condition to sibling conditions via shared-mechanism connections. Filterable by exam topic. State lives entirely in the URL hash so students can share 'this exact view with this filter applied' links to each other.",
-    decision:
-      "Plain SVG for the graph engine, not D3 or Cytoscape. The graph sizes max out at about 180 nodes per topic, which is trivially renderable by the browser natively, and the event model on SVG elements is 1:1 with HTML. Importing a 400KB graph library to save 100 lines of my own layout code wasn't worth it.",
-    wrong:
-      "First version used the SVG viewBox as the state carrier in the URL hash, because it seemed like free zoom history. Bad idea. On one occasion a student shared a link to a zoomed-out view that accidentally exposed the unreleased next-exam-topic graph nodes that were hidden in that build but still rendered in the viewBox. Nothing actually confidential, but still embarrassing. State hash is now an allowlist. Zoom is not included.",
-    result:
-      "Shipped in 2024 for one cohort of 180 students. 92% of them used it within two weeks of launch and 68% said they'd used a shared link in a study group. No server at all — just static files on Cloudflare Pages, zero ongoing cost.",
-    current:
-      "Feature-frozen. The cohort moves on each year and I hand the GitHub repo over to two current students with write-access so they can edit content. I occasionally review the odd pull request. Otherwise no active work.",
-    demo: {
-      url: "https://map2med.example.com/",
-      label: "open Map2Med →",
-    },
+      "oaiusdoiuasoidu aosid uas jdlk ajskld aksd.",
   },
 };
 
@@ -105,10 +35,10 @@ const CASES = {
   const FIELD_MAP = {
     ref: "caseRef", title: "caseTitle", tags: "caseTags", status: "caseStatus",
     problem: "caseProblem", built: "caseBuilt", decision: "caseDecision",
-    wrong: "caseWrong", result: "caseResult", current: "caseCurrent",
+    wrong: "caseWrong", result: "caseResult", current: "caseCurrent"
   };
-  const demoSection = document.getElementById("caseDemoSection");
-  const demoLink = document.getElementById("caseDemoLink");
+  const demoSection = $("caseDemoSection");
+  const demoLink = $("caseDemoLink");
 
   function populate(key) {
     const c = CASES[key];
@@ -118,6 +48,11 @@ const CASES = {
     if (demoSection.hidden) return;
     demoLink.href = c.demo.url;
     demoLink.textContent = (c.demo.label || c.demo.url).trim();
+  }
+
+  function currentKey() {
+    const h = location.hash.slice(1).trim().toLowerCase();
+    return KEYS.includes(h) ? h : null;
   }
 
   function open(key, writeHash = true) {
@@ -131,11 +66,6 @@ const CASES = {
     catch (_) { location.hash = key; }
   }
 
-  function currentKey() {
-    const h = location.hash.replace(/^#/, "").trim().toLowerCase();
-    return KEYS.includes(h) ? h : null;
-  }
-
   function close(writeHash = true) {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
@@ -147,6 +77,21 @@ const CASES = {
     setTimeout(() => (skipHash = false), 40);
   }
 
+  rows.forEach((row) => {
+    const key = row.dataset.project;
+    row.addEventListener("click", () => open(key));
+    row.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " " || e.code === "Space") {
+        e.preventDefault();
+        open(key);
+      }
+    });
+  });
+
+  document.querySelector(".case-overlay").addEventListener("click", () => close());
+  document.querySelector(".case-close").addEventListener("click", () => close());
+  document.addEventListener("keydown", (e) =>
+    e.key === "Escape" && modal.classList.contains("open") && close());
   const syncFromUrl = () => {
     if (skipHash) return;
     const key = currentKey();
@@ -156,21 +101,6 @@ const CASES = {
   addEventListener("popstate", syncFromUrl);
 
   currentKey() && open(currentKey(), false);
-
-  rows.forEach((row) => {
-    row.addEventListener("click", () => open(row.getAttribute("data-project")));
-    row.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " " || e.code === "Space") {
-        e.preventDefault();
-        open(row.getAttribute("data-project"));
-      }
-    });
-  });
-
-  document.querySelector(".case-overlay").addEventListener("click", () => close());
-  document.querySelector(".case-close").addEventListener("click", () => close());
-  document.addEventListener("keydown", (e) =>
-    e.key === "Escape" && modal.classList.contains("open") && close());
 
   modal.addEventListener("click", (e) => e.target.hasAttribute("data-close") && close());
   const sql = $("sqlLine");
@@ -186,25 +116,4 @@ const CASES = {
       setTimeout(() => (busy = false), rows.length * 70 + 620);
     });
   }
-
-  // Self-check — fail loud on boot if CASES / rows drift.
-  (function selfCheck() {
-    const fieldKeys = Object.keys(FIELD_MAP);
-    for (const key of KEYS) {
-      const c = CASES[key];
-      if (!c) throw new Error("KEYS[" + key + "] missing from CASES");
-      for (const fk of fieldKeys) {
-        if (typeof c[fk] !== "string" || !c[fk].trim().length) {
-          throw new Error("CASES." + key + "." + fk + " missing or empty");
-        }
-      }
-      if ("demo" in c && (!c.demo || typeof c.demo.url !== "string" || !c.demo.url)) {
-        throw new Error("CASES." + key + ".demo present but url is missing");
-      }
-    }
-    rows.forEach((row) => {
-      const k = row.dataset.project;
-      if (!KEYS.includes(k)) throw new Error("Project row data-project='" + k + "' not in CASES keys");
-    });
-  })();
 })();
