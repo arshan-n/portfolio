@@ -6,7 +6,7 @@ Feel free to contact me if you have any suggestions or issues.
 
 ## Run locally
 
-Static site with no build, so any static server will work.
+Static site with no build, so any static server will work! :)
 
 ```bash
 # python
