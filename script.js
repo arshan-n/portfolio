@@ -23,7 +23,7 @@ const CASES = {
   try {
     const s = "font-family:'JetBrains Mono',monospace;font-size:13px;padding:4px 8px;line-height:1.5;";
     console.log("%c%s", s + "color:#111;background:#F0ECE2;", " // You looked under the hood.");
-    console.log("%c%s", s + "color:#111;background:#FAFAF7;", " I like you.");
+    console.log("%c%s", s + "color:#111;background:#F0ECE2;", " I like you.");
   } catch (_) {}
 
   const KEYS = Object.keys(CASES);
