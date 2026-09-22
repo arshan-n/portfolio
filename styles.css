@@ -232,7 +232,18 @@ body {
   transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
 }
 .case-close:hover { background: var(--hover-bg); color: var(--ink); border-color: var(--ink-4); }
-.case-body { padding: 32px 36px 44px; }
+.case-body { padding: 32px 36px 44px; min-height: 220px; }
+.case-coming-soon {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  text-align: center;
+}
 
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(18px); }
