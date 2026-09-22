@@ -33,7 +33,7 @@ body {
 .mono { font-family: var(--mono); }
 
 .header {
-  padding-bottom: 56px;
+  padding-bottom: 32px;
   border-bottom: 1px solid var(--rule);
   margin-bottom: 0;
 }
@@ -60,8 +60,18 @@ body {
   max-width: 560px;
 }
 
+.about-body {
+  max-width: 620px;
+  font-size: clamp(15.5px, 1.8vw, 17px);
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.about-body p + p {
+  margin-top: 16px;
+}
+
 .section {
-  padding: 44px 0;
+  padding: 32px 0;
   border-top: 1px solid var(--rule);
 }
 
@@ -329,8 +339,8 @@ body {
 
 @media (max-width: 640px) {
   .container { padding: 56px 20px 72px; }
-  .header { padding-bottom: 40px; }
-  .section { padding: 32px 0; }
+  .header { padding-bottom: 24px; }
+  .section { padding: 24px 0; }
   .section-label { margin-bottom: 20px; }
   .project-row { grid-template-columns: 44px 1fr; padding: 18px 0; }
   .project-row::after { right: 4px; }
