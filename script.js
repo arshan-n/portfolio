@@ -64,6 +64,7 @@ const CASES = {
   const modal = $("caseModal");
   const rows = document.querySelectorAll(".project-row");
   let skipHash = false;
+  let lastOpener = null;
 
   const FIELD_MAP = {
     ref: "caseRef", title: "caseTitle", tags: "caseTags", status: "caseStatus",
@@ -110,6 +111,10 @@ const CASES = {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    if (lastOpener) {
+      lastOpener.blur();
+      lastOpener = null;
+    }
     if (!writeHash || !currentKey()) return;
     skipHash = true;
     try { history.pushState({ key: null }, "", location.pathname + location.search); }
@@ -119,10 +124,11 @@ const CASES = {
 
   rows.forEach((row) => {
     const key = row.dataset.project;
-    row.addEventListener("click", () => open(key));
+    row.addEventListener("click", () => { lastOpener = row; open(key); });
     row.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " " || e.code === "Space") {
         e.preventDefault();
+        lastOpener = row;
         open(key);
       }
     });
