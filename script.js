@@ -1,21 +1,51 @@
 const CASES = {
-  mashtest: {
-    ref: "CASE / 00",
-    title: "test",
-    tags: "qwerty / asdf",
-    status: "wip",
-    problem:
-      "alskdjlkasjdlk asj dlkj aslkd jlkasj dljksld.",
-    built:
-      "dskfjk sjdfkl sjdhf lkjsd lkf sjdklf qwei qpw oiru jaksdf lkxj.",
-    decision:
-      "qowiru qpw pei oqi wepr oqw eiro pw iou qwp eor iqwp eiour.",
-    wrong:
-      "zoxmvbc nbxzcv mzcx bv zxmv bvcxz lkhgfd sa poi uy tr ew.",
-    result:
-      "aklsjd fqpw eiur ymvnx zc bhasgdf ioyqw uer zxmbv ckhalsd fp.",
-    current:
-      "oaiusdoiuasoidu aosid uas jdlk ajskld aksd.",
+  "atvidaberg-tandvard": {
+    ref: "CASE / 01",
+    title: "Åtvidaberg Tandvård",
+    tags: "Freelance / Full-Stack Developer / Dental Clinic",
+    status: "WIP",
+    problem: "TODO",
+    built: "Currently designing & developing a new website for Åtvidaberg Tandvård, a dental clinic in Sweden, alongside building a backend system to connect the website with the clinic's existing booking software, Opus Dental.",
+    decision: "TODO",
+    wrong: "TODO",
+    result: "TODO",
+    current: "WIP. Sep 2026 – Present · 1 mo · Remote.",
+  },
+  "codecheckr": {
+    ref: "CASE / 02",
+    title: "CodeCheckr",
+    tags: "Self-employed / Founder & Full-Stack / EdTech",
+    status: "WIP",
+    problem: "TODO",
+    built: "Founded and developing CodeCheckr, a coding education & assessment platform for GCSE Computer Science students. Built the full platform from the ground up: student & class management, secure in-browser Python execution, custom assignment & test case creation for teachers, and a library of pre-made programming exercises.",
+    decision: "TODO",
+    wrong: "TODO",
+    result: "TODO",
+    current: "WIP. Finalising teacher analytics and brand identity re-work before closed beta. Feb 2025 – Present · 1 yr 8 mos · London, UK.",
+  },
+  "arshachu": {
+    ref: "CASE / 03",
+    title: "Arshachu",
+    tags: "Self-employed / Founder & Full-Stack / E-Commerce",
+    status: "Completed",
+    problem: "TODO",
+    built: "Founded Arshachu at 15, scaling from a few hundred pounds of initial capital to a six-figure operation in under a year. Designed and built the full-stack e-commerce platform from scratch using React, TypeScript, Supabase and PostgreSQL; integrated Stripe payments and subscriptions, automated inventory management, customer accounts, email marketing and Royal Mail shipping automation.",
+    decision: "TODO",
+    wrong: "TODO",
+    result: "Six-figure revenue within a year of founding.",
+    current: "Mar 2025 – Feb 2026 · 1 yr · London, UK.",
+  },
+  "map2med": {
+    ref: "CASE / 04",
+    title: "Map2Med",
+    tags: "Freelance / Web Developer / MedTech",
+    status: "Completed",
+    problem: "TODO",
+    built: "Designed & developed the Map2Med website using HTML, CSS, and JavaScript. One of my earliest web dev projects; first chance to apply learning to a real-world project.",
+    decision: "TODO",
+    wrong: "TODO",
+    result: "TODO",
+    current: "Jun 2024 – Jul 2024 · 2 mos · Remote.",
   },
 };
 
