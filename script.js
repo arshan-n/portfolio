@@ -26,6 +26,9 @@ const CASES = {
     console.log("%c%s", s + "color:#111;background:#F0ECE2;", " I like you.");
   } catch (_) {}
 
+  // ponytail: flip to false to re-enable full case-study modal system
+  const COMING_SOON = true;
+
   const KEYS = Object.keys(CASES);
   const $ = (id) => document.getElementById(id);
   const modal = $("caseModal");
@@ -39,8 +42,15 @@ const CASES = {
   };
   const demoSection = $("caseDemoSection");
   const demoLink = $("caseDemoLink");
+  const caseComingSoon = $("caseComingSoon");
+  const caseLegacy = $("caseLegacy");
+  if (caseComingSoon && caseLegacy) {
+    caseComingSoon.hidden = !COMING_SOON;
+    caseLegacy.hidden = COMING_SOON;
+  }
 
   function populate(key) {
+    if (COMING_SOON) return;
     const c = CASES[key];
     if (!c) return;
     for (const k in FIELD_MAP) $(FIELD_MAP[k]).textContent = c[k];
