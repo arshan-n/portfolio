@@ -23,4 +23,4 @@ Then open whatever localhost port is prompted in your terminal.
 
 
 
--# yes i use ai to help me write commit descriptions :p
+yes i use ai to help me write commit descriptions :p
